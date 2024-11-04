@@ -1,6 +1,6 @@
 plugins {
-    id 'java-library'
-    id 'maven-publish'
+	id 'java-library'
+	id 'maven-publish'
 	id 'signing'
 	id 'com.diffplug.spotless' version '6.22.0'
 	id 'idea'
@@ -19,108 +19,108 @@ base {
 }
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(java_version)
-    withSourcesJar()
-    withJavadocJar()
+	toolchain.languageVersion = JavaLanguageVersion.of(java_version)
+	withSourcesJar()
+	withJavadocJar()
 }
 
 repositories {
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = 'Modrinth'
-                url = 'https://api.modrinth.com/maven'
-            }
-        }
-        filter { includeGroupAndSubgroups "maven.modrinth" }
-    }
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = 'JEI'
-                url = 'https://maven.blamejared.com/'
-            }
-        }
-        filter { includeGroupAndSubgroups "mezz.jei" }
-    }
-    maven {
-        name = 'TommyLib'
-        url = 'https://dl.cloudsmith.io/public/thomasglasser/tommylib/maven/'
-        content {
-            includeGroupAndSubgroups("dev.thomasglasser.tommylib")
-        }
-    }
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = 'Modrinth'
+				url = 'https://api.modrinth.com/maven'
+			}
+		}
+		filter { includeGroupAndSubgroups "maven.modrinth" }
+	}
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = 'JEI'
+				url = 'https://maven.blamejared.com/'
+			}
+		}
+		filter { includeGroupAndSubgroups "mezz.jei" }
+	}
 	maven {
-        name = "Bundle Weight, There's More!"
-        url = 'https://dl.cloudsmith.io/public/thomasglasser/bundleweight/maven/'
-        content {
-            includeGroupAndSubgroups("dev.thomasglasser.bundleweight")
-        }
-    }
-    maven {
-        name = 'NeoForge'
-        url = 'https://maven.neoforged.net/releases'
-    }
-    maven {
-        name = 'Mojang Meta'
-        url = 'https://maven.neoforged.net/mojang-meta'
-    }
-    mavenCentral()
-    mavenLocal()
+		name = 'TommyLib'
+		url = 'https://dl.cloudsmith.io/public/thomasglasser/tommylib/maven/'
+		content {
+			includeGroupAndSubgroups("dev.thomasglasser.tommylib")
+		}
+	}
+	maven {
+		name = "Bundle Weight, There's More!"
+		url = 'https://dl.cloudsmith.io/public/thomasglasser/bundleweight/maven/'
+		content {
+			includeGroupAndSubgroups("dev.thomasglasser.bundleweight")
+		}
+	}
+	maven {
+		name = 'NeoForge'
+		url = 'https://maven.neoforged.net/releases'
+	}
+	maven {
+		name = 'Mojang Meta'
+		url = 'https://maven.neoforged.net/mojang-meta'
+	}
+	mavenCentral()
+	mavenLocal()
 }
 
 neoForge {
-    version = project.neo_version
+	version = project.neo_version
 
-    parchment {
-        mappingsVersion = project.parchment_version
-        minecraftVersion = project.parchment_minecraft_version
-    }
+	parchment {
+		mappingsVersion = project.parchment_version
+		minecraftVersion = project.parchment_minecraft_version
+	}
 
-    runs {
-        client {
-            client()
-        }
+	runs {
+		client {
+			client()
+		}
 
-        client_2 {
-            client()
-            gameDirectory = project.layout.projectDirectory.dir('runs/client_2')
-            programArguments = ["--username", "DevAlt"]
-        }
+		client_2 {
+			client()
+			gameDirectory = project.layout.projectDirectory.dir('runs/client_2')
+			programArguments = ["--username", "DevAlt"]
+		}
 
-        server {
-            server()
-        }
+		server {
+			server()
+		}
 
-        // This run config launches GameTestServer and runs all registered gametests, then exits.
-        // By default, the server will crash when no gametests are provided.
-        // The gametest system is also enabled by default for other run configs under the /test command.
-        gameTestServer {
-            type = "gameTestServer"
-        }
+		// This run config launches GameTestServer and runs all registered gametests, then exits.
+		// By default, the server will crash when no gametests are provided.
+		// The gametest system is also enabled by default for other run configs under the /test command.
+		gameTestServer {
+			type = "gameTestServer"
+		}
 
-        data {
-            data()
+		data {
+			data()
 
-            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
-        }
+			programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+		}
 
-        configureEach {
-            systemProperty 'forge.logging.markers', 'REGISTRIES'
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-            ideName = "${it.name.replace('_', ' ').capitalize()}"
+		configureEach {
+			systemProperty 'forge.logging.markers', 'REGISTRIES'
+			systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+			ideName = "${it.name.replace('_', ' ').capitalize()}"
 
-            logLevel = org.slf4j.event.Level.DEBUG
+			logLevel = org.slf4j.event.Level.DEBUG
 
 			gameDirectory = project.layout.projectDirectory.dir("runs/$it.name")
 		}
-    }
+	}
 
-    mods {
-        "${mod_id}" {
-            sourceSet(sourceSets.main)
-        }
-    }
+	mods {
+		"${mod_id}" {
+			sourceSet(sourceSets.main)
+		}
+	}
 }
 
 // Include resources generated by data generators.
@@ -181,7 +181,7 @@ javadoc {
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
-    var replaceProperties = [
+	var replaceProperties = [
 			mod_version: mod_version,
 			mod_group_id: mod_group_id,
 			minecraft_version: minecraft_version,
@@ -200,10 +200,10 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
 			tommylib_version: tommylib_version
 	]
 
-    inputs.properties replaceProperties
-    expand replaceProperties
-    from "src/main/templates"
-    into "build/generated/sources/modMetadata"
+	inputs.properties replaceProperties
+	expand replaceProperties
+	from "src/main/templates"
+	into "build/generated/sources/modMetadata"
 }
 
 // Include the output of "generateModMetadata" as an input directory for the build
@@ -280,7 +280,7 @@ signing {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+	options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
 idea {

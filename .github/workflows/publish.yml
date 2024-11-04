@@ -30,8 +30,7 @@ jobs:
     needs: call-build-workflow
     runs-on: ubuntu-latest
     env:
-      # Replace with GitHub name
-      changelog: '**Full Changelog**: https://github.com/thomasglasser/NeoForge-Template/compare/'
+      changelog: '**Full Changelog**: https://github.com/thomasglasser/Bundle-Weight-Theres-Four/compare/'
     permissions:
       contents: write
     strategy:
@@ -44,8 +43,7 @@ jobs:
         uses: actions/download-artifact@v3
         continue-on-error: true
         with:
-          # Replace with mod name
-          name: NeoForge Template
+          name: Bundle Weight, There's Four!
 
       - name: Checking and setting the environment
         id: mod_env
@@ -95,8 +93,7 @@ jobs:
           game-versions: |
             ${{ inputs.game_versions }}
 
-          # Replace with Modrinth ID
-          modrinth-id: abcdef
+          modrinth-id: bundlefour
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
       - name: Publish Curseforge Release
@@ -114,6 +111,5 @@ jobs:
           game-versions: |
             ${{ inputs.game_versions }}
 
-          # Replace with CurseForge ID
-          curseforge-id: 123456
+          curseforge-id: 1134122
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}

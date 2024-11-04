@@ -50,6 +50,13 @@ repositories {
             includeGroupAndSubgroups("dev.thomasglasser.tommylib")
         }
     }
+	maven {
+        name = "Bundle Weight, There's More!"
+        url = 'https://dl.cloudsmith.io/public/thomasglasser/bundleweight/maven/'
+        content {
+            includeGroupAndSubgroups("dev.thomasglasser.bundleweight")
+        }
+    }
     maven {
         name = 'NeoForge'
         url = 'https://maven.neoforged.net/releases'
@@ -125,6 +132,7 @@ configurations {
 
 dependencies {
 	jarJar implementation("dev.thomasglasser.tommylib:tommylib-neoforge-${minecraft_version}:${tommylib_version}")
+	jarJar implementation("dev.thomasglasser.bundleweight:bundleweight-neoforge-${minecraft_version}:${bundleweight_version}")
 
 	// Runtime
 	localRuntime "maven.modrinth:jade:${jade_version}+neoforge"
@@ -219,7 +227,7 @@ publishing {
 				licenses {
 					license {
 						name = project.mod_license
-						url = "https://github.com/thomasglasser/${github_name}/blob/${minecraft_version}/LICENSE"
+						url = project.mod_license_url
 					}
 				}
 				developers {

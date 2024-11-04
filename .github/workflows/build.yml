@@ -26,8 +26,7 @@ jobs:
       - name: Upload Jars
         uses: actions/upload-artifact@v3.1.2
         with:
-          # Replace with mod name
-          name: NeoForge Template
+          name: Bundle Weight, There's Four!
           if-no-files-found: error
           path: |
             build/libs

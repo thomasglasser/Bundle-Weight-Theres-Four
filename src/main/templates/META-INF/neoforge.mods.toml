@@ -1,7 +1,7 @@
 modLoader="javafml"
 loaderVersion="[${major_fml_version},)"
 license="${license}"
-issueTrackerURL="${license_url}"
+issueTrackerURL="https://github.com/thomasglasser/${github_name}/issues"
 [[mods]]
 modId="${mod_id}"
 version="${version}"

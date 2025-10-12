@@ -25,6 +25,6 @@ public class BundleFour {
     }
 
     private static void onModifyDefaultComponents(ModifyDefaultComponentsEvent event) {
-        event.modifyMatching(item -> !(item instanceof BundleItem) && item.getDefaultMaxStackSize() == 1, builder -> builder.set(BundleWeightDataComponents.BUNDLE_WEIGHT.get(), Fraction.ONE_QUARTER).build());
+        event.modifyMatching(item -> !(item instanceof BundleItem || item.components().has(BundleWeightDataComponents.BUNDLE_WEIGHT)) && item.getDefaultMaxStackSize() == 1, builder -> builder.set(BundleWeightDataComponents.BUNDLE_WEIGHT.get(), Fraction.ONE_QUARTER).build());
     }
 }

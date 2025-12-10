@@ -1,0 +1,61 @@
+plugins {
+	id "bundlefour-loader"
+	id 'net.neoforged.moddev' version "${mdg_version}"
+}
+
+neoForge {
+	version = "${neoforge_version}"
+
+	parchment {
+		minecraftVersion = parchment_minecraft_version
+		mappingsVersion = parchment_version
+	}
+
+	def at = rootProject.project(":common").file('src/main/resources/META-INF/accesstransformer.cfg')
+	if (file(at).exists()) {
+		accessTransformers = [at]
+	}
+
+	runs {
+		configureEach {
+			systemProperties.put('terminal.ansi', 'true')
+		}
+		client {
+			client()
+			ideName = "NeoForge Client"
+			gameDirectory = project.layout.projectDirectory.dir('runs/client')
+		}
+		client_alt {
+			client()
+			ideName = "NeoForge Client 2"
+			gameDirectory = project.layout.projectDirectory.dir('runs/client_alt')
+			programArguments = ["--username", "DevAlt"]
+		}
+		server {
+			server()
+			ideName = "NeoForge Server"
+			gameDirectory = project.layout.projectDirectory.dir('runs/server')
+		}
+	}
+
+	mods {
+		bundlefour {
+			sourceSet sourceSets.main
+		}
+	}
+}
+
+configurations {
+	runtimeClasspath.extendsFrom localRuntime
+}
+
+dependencies {
+	jarJar implementation("dev.thomasglasser.tommylib:tommylib-neoforge-${minecraft_version}:${tommylib_version}") {
+		transitive = false
+	}
+	jarJar implementation("dev.thomasglasser.bundleweight:bundleweight-neoforge-${minecraft_version}:${bundleweight_version}")
+
+	// Runtime
+//	localRuntime "maven.modrinth:jade:${jade_version}+neoforge"
+//	localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+}

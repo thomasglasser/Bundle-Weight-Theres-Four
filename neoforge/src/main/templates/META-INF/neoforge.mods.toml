@@ -13,8 +13,6 @@ authors="${mod_author}"
 description='''
 ${description}
 '''
-[[mixins]]
-config = "${mod_id}.mixins.json"
 [mc-publish]
 loaders = ['neoforge']
 [[dependencies.${mod_id}]]

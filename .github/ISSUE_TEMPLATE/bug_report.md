@@ -23,7 +23,8 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
- - Mod Version [e.g. 1.2.3]
+- Loader [e.g. NeoForge, Fabric, Quilt]
+- Mod Version [e.g. 1.2.3]
  - Minecraft Version [e.g. 1.19.4]
 
 **Additional context**

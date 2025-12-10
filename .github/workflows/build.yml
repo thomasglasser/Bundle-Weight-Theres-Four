@@ -29,4 +29,7 @@ jobs:
         with:
           name: Bundle Weight, There's Four!
           if-no-files-found: error
-          path: build/libs
+          path: |
+            fabric/build/libs
+            neoforge/build/libs
+            common/build/libs

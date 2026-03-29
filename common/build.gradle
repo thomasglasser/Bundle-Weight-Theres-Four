@@ -8,11 +8,6 @@ plugins {
 
 neoForge {
 	neoFormVersion = "${minecraft_version}-${neoform_version}"
-
-	parchment {
-		minecraftVersion = parchment_minecraft_version
-		mappingsVersion = parchment_version
-	}
 }
 
 @CacheableRule
@@ -51,10 +46,10 @@ dependencies {
 	}
 	implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 
-	implementation("dev.thomasglasser.tommylib:tommylib-common-${minecraft_version}:${tommylib_version}") {
+	compileOnly("dev.thomasglasser.tommylib:tommylib-common-${minecraft_version}:${tommylib_version}") {
 		transitive = false
 	}
-	implementation("dev.thomasglasser.bundleweight:bundleweight-common-${minecraft_version}:${bundleweight_version}")
+	compileOnly("dev.thomasglasser.bundleweight:bundleweight-common-${minecraft_version}:${bundleweight_version}")
 }
 
 configurations {

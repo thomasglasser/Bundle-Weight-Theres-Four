@@ -4,7 +4,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 
-@Mod(BundleFour.MOD_NAMESPACE)
+@Mod(BundleFour.MOD_ID)
 public class BundleFourNeoForge {
     public BundleFourNeoForge(IEventBus modBus) {
         modBus.addListener(BundleFourNeoForge::onModifyDefaultComponents);

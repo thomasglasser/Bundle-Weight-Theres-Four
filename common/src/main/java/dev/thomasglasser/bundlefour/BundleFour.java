@@ -2,7 +2,9 @@ package dev.thomasglasser.bundlefour;
 
 import dev.thomasglasser.bundleweight.api.BundleWeightDataComponents;
 import java.util.function.BiConsumer;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BundleItem;
 import net.minecraft.world.item.Item;
@@ -19,8 +21,8 @@ public class BundleFour {
         return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 
-    public static boolean hasQuarterBundleWeight(Item item) {
-        return !(item instanceof BundleItem || item.components().has(BundleWeightDataComponents.BUNDLE_WEIGHT.get())) && item.getDefaultMaxStackSize() == 1;
+    public static boolean hasQuarterBundleWeight(Item item, DataComponentGetter components) {
+        return !(item instanceof BundleItem || components.get(BundleWeightDataComponents.BUNDLE_WEIGHT.get()) != null) && components.getOrDefault(DataComponents.MAX_STACK_SIZE, 1) == 1;
     }
 
     public static void setQuarterBundleWeight(BiConsumer<DataComponentType<Fraction>, Fraction> builder) {

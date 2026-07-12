@@ -76,16 +76,10 @@ repositories {
         filter { includeGroupAndSubgroups("org.spongepowered") }
     }
     maven {
-        name = 'TommyLib'
-        url = 'https://dl.cloudsmith.io/public/thomasglasser/tommylib/maven/'
+        name = "TommyLib and Bundle Weight, There's More!"
+        url = 'https://maven.thomasglasser.dev/releases/'
         content {
             includeGroupAndSubgroups("dev.thomasglasser.tommylib")
-        }
-    }
-    maven {
-        name = "Bundle Weight, There's More!"
-        url = 'https://dl.cloudsmith.io/public/thomasglasser/bundleweight/maven/'
-        content {
             includeGroupAndSubgroups("dev.thomasglasser.bundleweight")
         }
     }
@@ -140,7 +134,6 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             license: license,
             description: project.description,
             neoforge_version: neoforge_version,
-            major_fml_version: major_fml_version,
             fabric_version: fabric_version,
             fabric_loader_version: fabric_loader_version,
             java_version: java_version,
@@ -215,58 +208,4 @@ immaculate {
 javadoc {
     failOnError = false
     options.tags = [ "apiNote", "reason" ]
-}
-
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            artifactId base.archivesName.get()
-            from components.java
-        }
-
-        maven(MavenPublication) {
-            pom {
-                name = project.mod_name
-                description = project.description
-                url = "https://github.com/thomasglasser/${github_name}/wiki"
-                licenses {
-                    license {
-                        name = project.license
-                        url = project.license_url
-                    }
-                }
-                developers {
-                    developer {
-                        id = project.mod_author
-                        name = project.mod_author
-                    }
-                }
-                issueManagement {
-                    system = 'GitHub'
-                    url = "https://github.com/thomasglasser/${github_name}/issues"
-                }
-                scm {
-                    connection = "scm:git:git://github.com/thomasglasser/${github_name}.git"
-                    developerConnection = "scm:git:ssh://github.com:thomasglasser/${github_name}.git"
-                    url = "https://github.com/thomasglasser/${github_name}/tree/${minecraft_version}"
-                }
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = "Cloudsmith"
-            url = "https://maven.cloudsmith.io/thomasglasser/${mod_id}/"
-            credentials {
-                username = project.findProperty("CLOUDSMITH_USERNAME") ?: System.getenv("CLOUDSMITH_USERNAME")
-                password = project.findProperty("CLOUDSMITH_API_KEY") ?: System.getenv("CLOUDSMITH_API_KEY")
-            }
-        }
-    }
-}
-
-signing {
-    useGpgCmd()
-    sign publishing.publications
 }
